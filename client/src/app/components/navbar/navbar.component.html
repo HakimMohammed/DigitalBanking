@@ -1,0 +1,18 @@
+<p-menubar [model]="items">
+  <ng-template #item let-item let-root="root">
+    <a pRipple
+       class="flex items-center p-menubar-item-link"
+       routerLink="{{ item.url }}"
+       routerLinkActive="p-highlight"
+    >
+      <span [class]="item.icon"></span>
+      <span>{{ item.label }}</span>
+    </a>
+  </ng-template>
+  <ng-template #end>
+    <div class="flex items-center gap-2">
+      <input type="text" pInputText placeholder="Search" class="w-36"/>
+      <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle"/>
+    </div>
+  </ng-template>
+</p-menubar>
