@@ -1,6 +1,6 @@
 <p-card header="Liste Des Customers" [style]="{'width': '100%'}">
 
-  <p-button label="Create Customer" icon="pi pi-plus" (click)="addCustomer()"></p-button>
+  <p-button *ngIf="authService.isAdmin()" label="Create Customer" icon="pi pi-plus" (click)="addCustomer()"></p-button>
 
   <!-- Data Table -->
   <p-table #dt [value]="customers" [paginator]="true" [rows]="5" [globalFilterFields]="['name', 'email']" [loading]="loading" [responsive]="true">
@@ -48,7 +48,7 @@
 
             <a pRipple
                class="flex justify-center items-center bg-green-500 text-white w-20 h-10 rounded"
-               routerLink="/accounts/customer/{{ customer.id }}"
+               routerLink="/admin/accounts/customer/{{ customer.id }}"
             >
               Accounts
             </a>

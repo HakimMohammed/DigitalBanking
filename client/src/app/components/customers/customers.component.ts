@@ -16,13 +16,15 @@ import {CustomerService} from '../../core/services/customer.service';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Ripple} from 'primeng/ripple';
 import {RouterLink, RouterLinkActive} from '@angular/router';
+import {NgIf} from '@angular/common';
+import {AuthService} from '../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
   styleUrl: './customers.component.css',
   standalone: true,
-  imports: [CardModule, TableModule, ButtonModule, ToastModule, IconField, InputIcon, InputTextModule, Dialog, FormsModule, ReactiveFormsModule, Ripple, RouterLink],
+  imports: [CardModule, TableModule, ButtonModule, ToastModule, IconField, InputIcon, InputTextModule, Dialog, FormsModule, ReactiveFormsModule, Ripple, RouterLink, NgIf],
   providers: [MessageService]
 })
 export class CustomersComponent implements OnInit {
@@ -45,7 +47,7 @@ export class CustomersComponent implements OnInit {
   displayDeleteDialog = false;
 
 
-  constructor(private customerService: CustomerService, private messageService: MessageService, private fb : FormBuilder) {}
+  constructor(private customerService: CustomerService, private messageService: MessageService, private fb : FormBuilder, protected authService: AuthService) {}
 
   loadCustomers() {
     this.customerService.getCustomers()

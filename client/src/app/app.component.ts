@@ -1,15 +1,24 @@
-import { Component } from '@angular/core';
-import {NavbarComponent} from './components/navbar/navbar.component';
-import { AccountsComponent } from './components/accounts/accounts.component';
+import {Component, OnInit} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
+import {AuthService} from './core/services/auth/auth.service';
 
 @Component({
   standalone: true,
   selector: 'app-root',
-  imports: [NavbarComponent, RouterOutlet],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
-export class AppComponent {
+
+export class AppComponent implements OnInit {
+
+  constructor(private authService:  AuthService) {
+  }
+
+  ngOnInit(): void {
+      this.authService.loadTokenFromStorage();
+  }
   title = 'Digital Banking App';
+
+
 }

@@ -12,13 +12,14 @@ import {AccountService} from '../../core/services/accounts/account.service';
 import {catchError, of, tap} from 'rxjs';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {NgIf} from '@angular/common';
+import {Ripple} from 'primeng/ripple';
 
 @Component({
   selector: 'app-accounts',
   templateUrl: './accounts.component.html',
   styleUrl: './accounts.component.css',
   standalone: true,
-  imports: [CardModule, TableModule, ToastModule, IconField, InputIcon, InputText, NgIf, RouterLink],
+  imports: [CardModule, TableModule, ToastModule, IconField, InputIcon, InputText, NgIf, RouterLink, Ripple],
   providers: [MessageService]
 })
 
