@@ -57,8 +57,55 @@
     <ng-template pTemplate="loading" />
   </p-table>
 
-  <p-dialog [(visible)]="visible" modal="modal" header="Make Operation">
+  <p-dialog [(visible)]="visible" modal="modal" header="Make Operation" [style]="{width: '400px'}">
+    <form [formGroup]="operationForm" class="p-fluid space-y-4">
 
+      <div class="card flex flex-col gap-2">
+        <label>Type</label>
+        <div class="flex flex-wrap gap-4">
+          <div class="flex items-center">
+            <p-radiobutton name="type" value="DEBIT" inputId="debit" formControlName="type"></p-radiobutton>
+            <label for="debit" class="ml-2">Debit</label>
+          </div>
+
+          <div class="flex items-center">
+            <p-radiobutton name="type" value="CREDIT" inputId="credit" formControlName="type"></p-radiobutton>
+            <label for="credit" class="ml-2">Credit</label>
+          </div>
+
+          <div class="flex items-center">
+            <p-radiobutton name="type" value="TRANSFER" inputId="transfer" formControlName="type"></p-radiobutton>
+            <label for="transfer" class="ml-2">Transfer</label>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="flex flex-col gap-2">
+        <label for="amount">Amount</label>
+        <input id="amount" type="number" pInputText formControlName="amount" />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="description">Description</label>
+        <input id="description" type="text" pInputText formControlName="description" />
+      </div>
+
+      <div *ngIf="isTransfer" class="flex flex-col gap-2">
+        <label for="destinationAccountId">Destination Account ID</label>
+        <input id="destinationAccountId" type="text" pInputText formControlName="destinationAccountId" />
+      </div>
+
+      <div class="flex justify-end gap-2 pt-4">
+        <button pButton type="button" label="Cancel" class="p-button-secondary" (click)="visible = false"></button>
+        <p-button
+          label="Submit"
+          (onClick)="handleSubmit()"
+          [disabled]="operationForm.invalid"
+          icon="pi pi-check"
+          class="mt-4" />      </div>
+
+    </form>
   </p-dialog>
 
   <p-toast />

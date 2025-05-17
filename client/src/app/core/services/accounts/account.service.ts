@@ -20,4 +20,36 @@ export class AccountService {
   public getAccountOperations(accountId: string): Observable<Array<Transaction>> {
     return this.http.get<Array<Transaction>>(API_URL + 'accounts/' + accountId + '/operations');
   }
+
+  public debit(data: {
+    accountId: string,
+    amount: number,
+    description: string
+  } ): Observable<any> {
+    return this.http.post<any>(API_URL + 'accounts/debit', data);
+  }
+
+  public credit(data: {
+    accountId: string,
+    amount: number,
+    description: string
+  } ): Observable<any> {
+    return this.http.post<any>(API_URL + 'accounts/credit', data);
+  }
+
+  public transfer(data: {
+    sourceAccountId: string,
+    destinationAccountId: string,
+    amount: number,
+    description: string
+  }): Observable<any> {
+    return this.http.post<any>(API_URL + 'accounts/transfer', {
+      accountSource: data.sourceAccountId,
+      accountDestination: data.destinationAccountId,
+      amount: data.amount,
+      description: data.description
+    });
+  }
+
 }
+
