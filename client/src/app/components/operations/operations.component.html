@@ -1,0 +1,65 @@
+<p-card header="Liste Des Operations" [style]="{'width': '100%'}">
+
+
+  <!-- Data Table -->
+  <p-table #dt [value]="operations" [paginator]="true" [rows]="5" [globalFilterFields]="['name', 'email']" [loading]="loading" [responsive]="true">
+    <ng-template pTemplate="caption">
+      <div class="flex">
+
+        <p-button label="Make Operation" (click)="showDialog()"/>
+
+        <p-iconfield iconPosition="left" class="ml-auto">
+          <p-inputicon>
+            <i class="pi pi-search"></i>
+          </p-inputicon>
+          <input
+            pInputText
+            type="text"
+            (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+            placeholder="Search keyword"
+          />
+        </p-iconfield>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
+        <th>Date</th>
+        <th>Amount</th>
+        <th pSortableColumn="type">Type <p-sortIcon field="type"></p-sortIcon></th>
+        <th pSortableColumn="description">Description <p-sortIcon field="description"></p-sortIcon></th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-operation let-columns="columns">
+      <tr>
+        <td>{{ operation.id }}</td>
+        <td>{{ operation.transactionDate }}</td>
+        <td>{{ operation.amount }}</td>
+        <td>{{ operation.type }}</td>
+        <td>{{ operation.description }}</td>
+        <td>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4">
+          <p class="flex items-center justify-center h-40 text-2xl">
+            No Operations found.
+          </p>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="loading" />
+  </p-table>
+
+  <p-dialog [(visible)]="visible" modal="modal" header="Make Operation">
+
+  </p-dialog>
+
+  <p-toast />
+</p-card>

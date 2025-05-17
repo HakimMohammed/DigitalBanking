@@ -2,6 +2,7 @@ package com.example.server.service;
 
 import com.example.server.dto.*;
 import com.example.server.entities.*;
+import com.example.server.enums.AccountStatus;
 import com.example.server.enums.TransactionType;
 import com.example.server.exceptions.BalanceNotSufficientException;
 import com.example.server.exceptions.BankAccountNotFoundException;
@@ -44,12 +45,15 @@ public class BankAccountServiceImpl implements BankAccountService {
     @Override
     public CurrentAccountDTO saveCurrentAccount(double initialBalance, double overDraft, Long customerId) throws CustomerNotFoundException {
         Customer customer = customerRepository.findById(customerId).orElse(null);
+        // random status
+        AccountStatus status = AccountStatus.values()[(int) (Math.random() * AccountStatus.values().length)];
         if (customer == null)
             throw new CustomerNotFoundException("Customer not found");
         CurrentAccount currentAccount = new CurrentAccount();
         currentAccount.setId(UUID.randomUUID().toString());
         currentAccount.setCreatedAt(new Date());
         currentAccount.setCustomer(customer);
+        currentAccount.setStatus(status);
         currentAccount.setBalance(initialBalance);
         currentAccount.setOverDraft(overDraft);
         CurrentAccount savedAccount = bankAccountRepository.save(currentAccount);
@@ -59,12 +63,15 @@ public class BankAccountServiceImpl implements BankAccountService {
     @Override
     public SavingAccountDTO saveSavingAccount(double initialBalance, double interestRate, Long customerId) throws CustomerNotFoundException {
         Customer customer = customerRepository.findById(customerId).orElse(null);
+        // random status
+        AccountStatus status = AccountStatus.values()[(int) (Math.random() * AccountStatus.values().length)];
         if (customer == null)
             throw new CustomerNotFoundException("Customer not found");
         SavingAccount savingAccount = new SavingAccount();
         savingAccount.setId(UUID.randomUUID().toString());
         savingAccount.setCreatedAt(new Date());
         savingAccount.setCustomer(customer);
+        savingAccount.setStatus(status);
         savingAccount.setBalance(initialBalance);
         savingAccount.setInterestRate(interestRate);
         SavingAccount savedAccount = bankAccountRepository.save(savingAccount);

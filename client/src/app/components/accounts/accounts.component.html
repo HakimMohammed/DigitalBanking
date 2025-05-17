@@ -1,3 +1,86 @@
-<div class="flex justify-center items-center">
-    <h1>Accounts</h1>
-</div>
+<p-card header="Liste Des Comptes" [style]="{'width': '100%'}">
+  <p-table #dt [value]="accounts" [paginator]="true" [rows]="10" [globalFilterFields]="['type']" [loading]="loading">
+
+    <ng-template pTemplate="caption">
+      <div class="flex">
+        <p-iconfield iconPosition="left" class="ml-auto">
+          <p-inputicon>
+            <i class="pi pi-search"></i>
+          </p-inputicon>
+          <input
+            pInputText
+            type="text"
+            (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+            placeholder="Search keyword"
+          />
+        </p-iconfield>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
+        <th>Balance</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th pSortableColumn="date">Date<p-sortIcon field="date"></p-sortIcon></th>
+        <th *ngIf="!customerId">Customer</th>
+        <th>Operations</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-account>
+      <tr>
+        <td>{{ account.id }}</td>
+        <td>{{ account.balance }}</td>
+        <td>{{ account.type }}</td>
+        <td>{{ account.status || "fff" }}</td>
+        <td>{{ account.createdAt }}</td>
+        <td *ngIf="!customerId">{{ account.customer.name }}</td>
+        <td>
+          <a pRipple
+             class="flex justify-center items-center bg-green-500 text-white w-24 h-10 rounded"
+             routerLink="/operations/account/{{ account.id }}"
+          >
+            Operations
+          </a>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4">
+          <p class="flex items-center justify-center h-40 text-2xl">
+            No customers found.
+          </p>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="loading" />
+  </p-table>
+
+  <!--  <p-button label="Add CustomerInterface" icon="pi pi-plus" (click)="addCustomer()"></p-button>-->
+<!--  <p-button label="Add Customer" icon="pi pi-plus"></p-button>-->
+
+
+  <!--  &lt;!&ndash; Add CustomerInterface Dialog &ndash;&gt;-->
+  <!--  <p-dialog [(visible)]="displayAddDialog" modal="modal" header="Add CustomerInterface">-->
+  <!--    &lt;!&ndash; Add CustomerInterface Form &ndash;&gt;-->
+  <!--    <form (ngSubmit)="onSubmit()">-->
+  <!--      &lt;!&ndash; Form Fields Here &ndash;&gt;-->
+  <!--      <button type="submit">Save</button>-->
+  <!--    </form>-->
+  <!--  </p-dialog>-->
+
+  <!--  &lt;!&ndash; Edit CustomerInterface Dialog &ndash;&gt;-->
+  <!--  <p-dialog [(visible)]="displayEditDialog" modal="modal" header="Edit CustomerInterface">-->
+  <!--    &lt;!&ndash; Edit CustomerInterface Form &ndash;&gt;-->
+  <!--    <form (ngSubmit)="onEditSubmit()">-->
+  <!--      &lt;!&ndash; Form Fields Here &ndash;&gt;-->
+  <!--      <button type="submit">Update</button>-->
+  <!--    </form>-->
+  <!--  </p-dialog>-->
+  <p-toast />
+</p-card>

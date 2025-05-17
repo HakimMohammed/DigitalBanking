@@ -5,7 +5,7 @@ A comprehensive digital banking system that allows management of customers, bank
 ## Overview
 
 This application provides a RESTful API for a digital banking system with the following features:
-- Customer management (create, read, update, delete)
+- CustomerInterface management (create, read, update, delete)
 - Bank account management (current accounts with overdraft, savings accounts with interest)
 - Transaction processing (credit, debit, transfer)
 - Transaction history viewing with pagination
@@ -23,7 +23,7 @@ This application provides a RESTful API for a digital banking system with the fo
 
 ### Entity Model
 
-- **Customer**: Represents bank customers with personal information
+- **CustomerInterface**: Represents bank customers with personal information
 - **BankAccount**: Abstract base class for all bank accounts
     - **CurrentAccount**: Checking account with overdraft facility
     - **SavingAccount**: Savings account with interest rate
@@ -86,14 +86,14 @@ http://localhost:8085/docs
 
 ### Main API Endpoints
 
-#### Customer Management
+#### CustomerInterface Management
 - `GET /customers` - List all customers
 - `GET /customers/{id}` - Get a specific customer
 - `POST /customers` - Create a new customer
 - `PUT /customers/{customerId}` - Update a customer
 - `DELETE /customers/{id}` - Delete a customer
 
-#### Account Management
+#### AccountInterface Management
 - `GET /accounts` - List all bank accounts
 - `GET /accounts/{accountId}` - Get a specific account
 
