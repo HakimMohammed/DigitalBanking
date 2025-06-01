@@ -13,6 +13,7 @@ import {catchError, of, tap} from 'rxjs';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {NgIf} from '@angular/common';
 import {Ripple} from 'primeng/ripple';
+import {AuthService} from '../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-accounts',
@@ -26,6 +27,7 @@ import {Ripple} from 'primeng/ripple';
 export class AccountsComponent implements OnInit {
 
     constructor(
+      protected authService: AuthService,
       private accountService: AccountService,
       private messageService: MessageService,
       private route: ActivatedRoute

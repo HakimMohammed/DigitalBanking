@@ -25,7 +25,7 @@
         <th>Status</th>
         <th pSortableColumn="date">Date<p-sortIcon field="date"></p-sortIcon></th>
         <th *ngIf="!customerId">Customer</th>
-        <th>Operations</th>
+        <th *ngIf="authService.isAdmin()">Operations</th>
       </tr>
     </ng-template>
 
@@ -37,7 +37,7 @@
         <td>{{ account.status || "fff" }}</td>
         <td>{{ account.createdAt }}</td>
         <td *ngIf="!customerId">{{ account.customer.name }}</td>
-        <td>
+        <td *ngIf="authService.isAdmin()">
           <a pRipple
              class="flex justify-center items-center bg-green-500 text-white w-24 h-10 rounded"
              routerLink="/admin/operations/account/{{ account.id }}"

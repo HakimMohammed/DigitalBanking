@@ -30,6 +30,7 @@ import {AuthService} from '../../core/services/auth/auth.service';
 export class CustomersComponent implements OnInit {
   customers! : Array<Customer>;
   loading: boolean = true;
+  isAdmin: boolean = false;
 
   isAddVisible : boolean = false;
 
@@ -100,6 +101,7 @@ export class CustomersComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isAdmin = this.authService.isAdmin();
     this.loadCustomers();
     this.initAddForm();
     this.initEditForm();
